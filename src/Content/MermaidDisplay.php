@@ -8,6 +8,8 @@ use Base3\Api\IMvcView;
 
 class MermaidDisplay implements IDisplay {
 
+	private array $data;
+
 	public function __construct(
 		private readonly IMvcView $view,
 		private readonly IAssetResolver $assetResolver
@@ -22,8 +24,11 @@ class MermaidDisplay implements IDisplay {
 	// Implementation of IOutput
 
 	public function getOutput(string $out = 'html', bool $final = false): string {
+		if ($final) return '';
+
 		$this->view->setPath(DIR_PLUGIN . 'Mermaid');
 		$this->view->setTemplate('Content/MermaidDisplay.php');
+		$this->view->assign('mermaid', $this->data['mermaid']);
 		$this->view->assign('resolve', fn($src) => $this->assetResolver->resolve($src));
 		return $this->view->loadTemplate();
 	}
@@ -35,5 +40,6 @@ class MermaidDisplay implements IDisplay {
 	// Implementation of IDisplay
 
 	public function setData($data) {
+		$this->data = (array)$data;
 	}
 }

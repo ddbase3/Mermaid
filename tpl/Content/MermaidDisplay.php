@@ -1,10 +1,5 @@
 <div class="mermaid">
-	flowchart TD
-		A[Start] --> B{Entscheidung}
-		B -->|Ja| C[Weiter]
-		B -->|Nein| D[Abbruch]
-		C --> E[Ende]
-		D --> E
+<?php echo $this->_['mermaid']; ?>
 </div>
 
 <script>

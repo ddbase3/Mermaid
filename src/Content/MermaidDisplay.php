@@ -28,7 +28,7 @@ class MermaidDisplay implements IDisplay {
 
 		$this->view->setPath(DIR_PLUGIN . 'Mermaid');
 		$this->view->setTemplate('Content/MermaidDisplay.php');
-		$this->view->assign('mermaid', $this->data['mermaid']);
+		$this->view->assign('mermaid', $this->data['mermaid'] ?? []);
 		$this->view->assign('resolve', fn($src) => $this->assetResolver->resolve($src));
 		return $this->view->loadTemplate();
 	}
